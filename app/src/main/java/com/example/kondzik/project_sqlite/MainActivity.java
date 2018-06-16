@@ -19,17 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            mDbHelper = new StoreDbHelper(this);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+        mDbHelper = new StoreDbHelper(this);
         displayDatabaseInfo();
         insertProduct();
-
-
     }
 
     private void insertProduct() {
@@ -37,14 +29,12 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
-        // and Toto's pet attributes are the values.
         ContentValues values = new ContentValues();
         values.put(StoreEntry.COLUMN_PRODUCT_NAME, "Zywiec");
         values.put(StoreEntry.COLUMN_PRODUCT_PRICE, 25.5);
         values.put(StoreEntry.COLUMN_PRODUCT_QUANTITY, 5);
         values.put(StoreEntry.COLUMN_PRODUCT_SUPPLIER_NAME, "Zywiec Polska");
         values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, "0048221004280");
-
 
         db.insert(StoreEntry.TABLE_NAME, null, values);
     }
@@ -62,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 StoreEntry.COLUMN_PRODUCT_QUANTITY,
                 StoreEntry.COLUMN_PRODUCT_SUPPLIER_NAME,
                 StoreEntry.COLUMN_SUPPLIER_PHONE
-                };
+        };
 
         // Perform a query on the pets table
         Cursor cursor = db.query(
@@ -79,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Create a header in the Text View that looks like this:
             //
-            // The pets table contains <number of rows in Cursor> pets.
-            // _id - name - breed - gender - weight
+            // The products table contains <number of rows in Cursor> products.
+            // _id - name - price - quantity - supplier name - phone
             //
             // In the while loop below, iterate through the rows of the cursor and display
             // the information from each column in this order.
